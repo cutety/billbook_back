@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("/user")
@@ -70,7 +71,7 @@ public class UserController {
             response.setStatus("4013");
             return response;
         }
-        if (!user.getCaptcha().equals(captchaKey)) {
+        if (!user.getCaptcha().equalsIgnoreCase(captchaKey)) {
             response.setMsg("验证码错误");
             response.setStatus("4014");
             return response;
@@ -84,6 +85,7 @@ public class UserController {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
             subject.login(token);
+            redisUtil.setEx(username,token.toString(),120, TimeUnit.MINUTES);
             response.setStatus("200");
             response.setMsg("登陆成功");
             response.setToken(token);
