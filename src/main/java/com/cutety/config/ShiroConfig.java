@@ -49,7 +49,7 @@ public class ShiroConfig {
         filterMap.put("/static/fonts/**", "anon");
         filterMap.put("/login/**", "anon");
         filterMap.put("/user/signIn","anon");
-        filterMap.put("/user/show","authc");
+
 
         bean.setFilterChainDefinitionMap(filterMap);
         return bean;

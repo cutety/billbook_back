@@ -1,9 +1,11 @@
 package com.cutety.controller;
 
+import com.cutety.entity.LoginDTO;
 import com.cutety.entity.Response;
 import com.cutety.entity.User;
 import com.cutety.service.UserService;
 import com.cutety.utils.CodeUtil;
+import com.cutety.utils.RedisUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -17,26 +19,34 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final RedisUtil redisUtil;
     public static Logger log = LoggerFactory.getLogger(UserController.class);
+
+    public UserController(RedisUtil redisUtil, UserService userService) {
+        this.redisUtil = redisUtil;
+        this.userService = userService;
+    }
+
     @CrossOrigin
     @ResponseBody
     @PostMapping("/register")
     public int addUser(User user) {
         String password = user.getPassword();
         String salt = new SecureRandomNumberGenerator().nextBytes().toString();
-        String pwdAfterHash = new SimpleHash("md5",password,salt,2).toString();
+        String pwdAfterHash = new SimpleHash("md5", password, salt, 2).toString();
         user.setPassword(pwdAfterHash);
         user.setSalt(salt);
         return userService.addUser(user);
     }
+
     @ResponseBody
     @PostMapping("/signIn")
     public String hello(HttpServletRequest request) {
@@ -47,20 +57,36 @@ public class UserController {
             return "登陆成功";
         }
     }
+
     @CrossOrigin
     @ResponseBody
     @PostMapping("/login")
-    public Response login(User user) {
+    public Response login(@RequestBody LoginDTO user) {
+        Response response = new Response();
+        String captchaKey = redisUtil.get(user.getCaptchaKey());
+        log.info("captchaKey:{}",captchaKey);
+        if(captchaKey == null) {
+            response.setMsg("验证码已过期");
+            response.setStatus("4013");
+            return response;
+        }
+        if (!user.getCaptcha().equals(captchaKey)) {
+            response.setMsg("验证码错误");
+            response.setStatus("4014");
+            return response;
+        }
+        //删除验证码
+        redisUtil.delete(captchaKey);
         String username = user.getUsername();
         String password = user.getPassword();
-        log.info("username:{},password:{}",username,password);
+        log.info("username:{},password:{}", username, password);
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(username,password);
-        Response response = new Response();
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
             subject.login(token);
             response.setStatus("200");
             response.setMsg("登陆成功");
+            response.setToken(token);
         } catch (UnknownAccountException e) {
             e.printStackTrace();
             response.setStatus("4012");
@@ -79,6 +105,7 @@ public class UserController {
     public String show() {
         return "show me ...";
     }
+
     @CrossOrigin
     @ResponseBody
     @PostMapping("/checkUsernameValidity")
