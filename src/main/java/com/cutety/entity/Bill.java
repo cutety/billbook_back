@@ -1,8 +1,14 @@
 package com.cutety.entity;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Bill {
     private Integer id;
 
@@ -16,51 +22,7 @@ public class Bill {
 
     private Integer userId;
 
-    public Integer getId() {
-        return id;
-    }
+    private Integer categoryId;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getBillDate() {
-        return billDate;
-    }
-
-    public void setBillDate(LocalDateTime billDate) {
-        this.billDate = billDate;
-    }
-
-    public Integer getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
-
-    public Long getConsumptionAmount() {
-        return consumptionAmount;
-    }
-
-    public void setConsumptionAmount(Long consumptionAmount) {
-        this.consumptionAmount = consumptionAmount;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+    private BillType billType;
 }

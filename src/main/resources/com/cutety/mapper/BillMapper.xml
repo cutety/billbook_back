@@ -8,15 +8,40 @@
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="consumption_amount" jdbcType="DECIMAL" property="consumptionAmount" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+  </resultMap>
+  
+  <resultMap id="BillResultMap" type="com.cutety.entity.Bill">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="bill_date" jdbcType="TIMESTAMP" property="billDate" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="consumption_amount" jdbcType="DECIMAL" property="consumptionAmount" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <association property="billType" javaType="com.cutety.entity.BillType">
+      <id column="id" jdbcType="INTEGER" property="id"/>
+      <result column="name" jdbcType="VARCHAR" property="name"/>
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
-    id, bill_date, type_id, remark, consumption_amount, user_id
+    id, bill_date, type_id, remark, consumption_amount, user_id, category_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from bill
     where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="findBillByCategoryIdAndUserId" parameterType="hashmap" resultMap="BillResultMap">
+    select
+    bill.id, bill.bill_date, bill.type_id, bill.remark, bill.consumption_amount, bill.user_id, bill.category_id,bill_type.name
+    from bill
+    left join bill_type
+    on bill.type_id = bill_type.id
+    where category_id = #{categoryId,jdbcType=INTEGER}
+    and user_id =#{userId,jdbcType=INTEGER}
   </select>
 
   <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">

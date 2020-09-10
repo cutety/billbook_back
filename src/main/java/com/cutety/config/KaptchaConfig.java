@@ -17,11 +17,11 @@ public class KaptchaConfig {
         properties.setProperty("kaptcha.border", "no");
         properties.setProperty("kaptcha.border.color", "105,179,90");
         properties.setProperty("kaptcha.textproducer.font.color", "black");
-        properties.setProperty("kaptcha.image.width", "110");
+        properties.setProperty("kaptcha.image.width", "250");
         properties.setProperty("kaptcha.image.height", "40");
         properties.setProperty("kaptcha.textproducer.char.string","23456789abcdefghkmnpqrstuvwxyzABCDEFGHKMNPRSTUVWXYZ");
         properties.setProperty("kaptcha.textproducer.font.size", "30");
-        properties.setProperty("kaptcha.textproducer.char.space","3");
+        properties.setProperty("kaptcha.textproducer.char.space","16");
         properties.setProperty("kaptcha.session.key", "code");
         properties.setProperty("kaptcha.textproducer.char.length", "4");
         properties.setProperty("kaptcha.textproducer.font.names", "宋体,楷体,微软雅黑");

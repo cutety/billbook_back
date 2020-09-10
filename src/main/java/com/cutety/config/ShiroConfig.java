@@ -41,7 +41,6 @@ public class ShiroConfig {
          * perms:拥有对某个资源的权限才能访问
          * role:拥有某个角色权限才能访问
          */
-
         LinkedHashMap<String, String> filterMap = new LinkedHashMap<>();
         filterMap.put("/", "anon");
         filterMap.put("/static/js/**", "anon");
@@ -49,8 +48,6 @@ public class ShiroConfig {
         filterMap.put("/static/fonts/**", "anon");
         filterMap.put("/login/**", "anon");
         filterMap.put("/user/signIn","anon");
-
-
         bean.setFilterChainDefinitionMap(filterMap);
         return bean;
     }

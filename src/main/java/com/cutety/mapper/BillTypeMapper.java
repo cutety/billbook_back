@@ -1,7 +1,10 @@
 package com.cutety.mapper;
 
 import com.cutety.entity.BillType;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+@Component
 public interface BillTypeMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +17,5 @@ public interface BillTypeMapper {
     int updateByPrimaryKeySelective(BillType record);
 
     int updateByPrimaryKey(BillType record);
+    List<BillType> getBillType();
 }
