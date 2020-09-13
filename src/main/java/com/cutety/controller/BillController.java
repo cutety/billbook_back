@@ -3,6 +3,7 @@ package com.cutety.controller;
 import com.cutety.entity.Bill;
 import com.cutety.entity.BillType;
 import com.cutety.entity.Categories;
+import com.cutety.entity.Response;
 import com.cutety.mapper.BillMapper;
 import com.cutety.service.BillService;
 import com.cutety.service.CategoriesService;
@@ -74,4 +75,22 @@ public class BillController {
     public List<Object> getCharges(@RequestParam Map<String,Integer> params) {
         return billService.findBillByCategoryIdAndUserId(params);
     }
+
+    @PostMapping("/updateBill")
+    @ResponseBody
+    public Response updateBill(@RequestBody Bill bill) {
+        Response response = new Response();
+        int res = billService.updateBill(bill);
+
+        if(res == 1) {
+            response.setMsg("success");
+            response.setStatus("200");
+            return response;
+        } else {
+            response.setMsg("fail...");
+            response.setStatus("400");
+            return response;
+        }
+    }
+
 }

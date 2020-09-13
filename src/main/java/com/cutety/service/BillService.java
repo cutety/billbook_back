@@ -11,4 +11,5 @@ public interface BillService {
     List<Bill> findBillByUserId(Integer userId);
     List<BillType> getBillType();
     List<Object> findBillByCategoryIdAndUserId(Map<String,Integer> params);
+    int updateBill(Bill bill);
 }

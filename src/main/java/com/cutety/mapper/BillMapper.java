@@ -22,4 +22,6 @@ public interface BillMapper {
 
     List<Bill> selectByUserId(Integer userId);
     List<Object> findBillByCategoryIdAndUserId(Map<String,Integer> params);
+
+    int updateBill(Bill bill);
 }

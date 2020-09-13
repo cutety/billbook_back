@@ -40,4 +40,9 @@ public class BillServiceImpl implements BillService {
     public List<Object> findBillByCategoryIdAndUserId(Map<String,Integer> params) {
         return billMapper.findBillByCategoryIdAndUserId(params);
     }
+
+    @Override
+    public int updateBill(Bill bill) {
+        return billMapper.updateBill(bill);
+    }
 }

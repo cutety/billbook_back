@@ -135,4 +135,12 @@
       user_id = #{userId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <update id="updateBill" parameterType="com.cutety.entity.Bill">
+    update bill
+    set
+        remark = #{remark,jdbcType=VARCHAR},
+        consumption_amount = #{consumptionAmount,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="billbook@39.97.178.218">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.19">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.18">
     <root id="1">
       <ServerVersion>5.6.49</ServerVersion>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -719,13 +719,9 @@
     </collation>
     <user id="225" parent="1" name="root">
       <Host>%</Host>
-      <ObjectGrants>ALL PRIVILEGES!
-</ObjectGrants>
     </user>
     <user id="226" parent="1" name="root">
       <Host>localhost</Host>
-      <ObjectGrants>ALL PRIVILEGES!
-</ObjectGrants>
     </user>
     <table id="227" parent="2" name="bill"/>
     <table id="228" parent="2" name="bill_type"/>
@@ -735,32 +731,39 @@
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>null</SequenceIdentity>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
     </column>
     <column id="232" parent="227" name="bill_date">
       <Position>2</Position>
       <DataType>timestamp|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
     </column>
     <column id="233" parent="227" name="type_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
     </column>
     <column id="234" parent="227" name="remark">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
       <Collation>utf8mb4_general_ci</Collation>
     </column>
     <column id="235" parent="227" name="consumption_amount">
       <Position>5</Position>
       <DataType>decimal(10)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
     </column>
     <column id="236" parent="227" name="user_id">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
     </column>
     <column id="237" parent="227" name="category_id">
       <Position>7</Position>
       <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
     </column>
     <index id="238" parent="227" name="type_id">
       <ColNames>type_id</ColNames>
@@ -798,11 +801,13 @@
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>null</SequenceIdentity>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
     </column>
     <column id="246" parent="228" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
     </column>
     <key id="247" parent="228" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
@@ -813,10 +818,12 @@
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
     </column>
     <column id="249" parent="229" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
     </column>
     <index id="250" parent="229" name="id">
       <ColNames>id</ColNames>
@@ -826,19 +833,23 @@
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>null</SequenceIdentity>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
     </column>
     <column id="252" parent="230" name="username">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
     </column>
     <column id="253" parent="230" name="password">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
     </column>
     <column id="254" parent="230" name="salt">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
     </column>
     <key id="255" parent="230" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>

@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
 @MapperScan("com.cutety.mapper")
-@ImportResource(locations = {"classpath:kaptcha/Kaptcha.xml"})
 public class BillBookApplication {
     public static void main(String[] args) {
         SpringApplication.run(BillBookApplication.class, args);
