@@ -42,6 +42,7 @@
     on bill.type_id = bill_type.id
     where category_id = #{categoryId,jdbcType=INTEGER}
     and user_id =#{userId,jdbcType=INTEGER}
+    order by bill_date desc
   </select>
 
   <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -140,7 +141,8 @@
     update bill
     set
         remark = #{remark,jdbcType=VARCHAR},
-        consumption_amount = #{consumptionAmount,jdbcType=DECIMAL}
+        consumption_amount = #{consumptionAmount,jdbcType=DECIMAL},
+        type_id = #{typeId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
